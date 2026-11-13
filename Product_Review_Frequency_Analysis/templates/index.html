@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Review Frequency Analysis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+  <div>
+    <p class="eyebrow">BIG DATA ANALYTICS PROJECT</p>
+    <h1>Product Review Frequency Analysis</h1>
+    <p class="subtitle">Understand product engagement, ratings, review trends and customer feedback.</p>
+  </div>
+  <span class="badge">Live dashboard</span>
+</header>
+<main>
+{% if error %}
+  <section class="panel error"><h2>Unable to load analysis</h2><p>{{ error }}</p><p>Check the CSV format and run <code>pip install -r requirements.txt</code>.</p></section>
+{% else %}
+  <section class="cards">
+    <article class="card"><span>Total reviews</span><strong>{{ summary.total_reviews }}</strong></article>
+    <article class="card"><span>Unique products</span><strong>{{ summary.unique_products }}</strong></article>
+    <article class="card"><span>Average rating</span><strong>{{ summary.average_rating }} / 5</strong></article>
+    <article class="card"><span>Most reviewed</span><strong class="product-name">{{ summary.most_reviewed_product }}</strong></article>
+  </section>
+  <section class="grid">
+    <article class="panel"><h2>Review frequency by product</h2><canvas id="productChart"></canvas></article>
+    <article class="panel"><h2>Sentiment distribution</h2><canvas id="sentimentChart"></canvas></article>
+    <article class="panel"><h2>Rating distribution</h2><canvas id="ratingChart"></canvas></article>
+    <article class="panel"><h2>Monthly review trend</h2><canvas id="monthlyChart"></canvas></article>
+  </section>
+  <section class="grid lower">
+    <article class="panel"><h2>Top words in reviews</h2>
+      <div class="word-list">{% for item in words %}<div class="word-row"><span>{{ item.word }}</span><b>{{ item.frequency }}</b></div>{% endfor %}</div>
+    </article>
+    <article class="panel"><h2>Product analysis table</h2>
+      <div class="table-wrap"><table><thead><tr><th>Product</th><th>Reviews</th><th>Avg. rating</th><th>Positive</th><th>Negative</th></tr></thead><tbody>
+      {% for p in products %}<tr><td>{{ p.product_name }}</td><td>{{ p.review_count }}</td><td>{{ p.average_rating }}</td><td>{{ p.positive_reviews }}</td><td>{{ p.negative_reviews }}</td></tr>{% endfor %}
+      </tbody></table></div>
+    </article>
+  </section>
+  <p class="note">Sentiment is estimated using a basic word-list method. Results are indicative, not a validated opinion-mining model.</p>
+{% endif %}
+</main>
+<script>
+const products = {{ products|tojson }};
+const ratings = {{ ratings|tojson }};
+const sentiments = {{ sentiments|tojson }};
+const monthly = {{ monthly|tojson }};
+if (products.length) {
+  new Chart(document.getElementById('productChart'), {type:'bar',data:{labels:products.map(x=>x.product_name),datasets:[{label:'Reviews',data:products.map(x=>x.review_count)}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}}}});
+  new Chart(document.getElementById('sentimentChart'), {type:'doughnut',data:{labels:sentiments.map(x=>x.sentiment),datasets:[{data:sentiments.map(x=>x.count)}]},options:{responsive:true}});
+  new Chart(document.getElementById('ratingChart'), {type:'bar',data:{labels:ratings.map(x=>x.rating+' star'),datasets:[{label:'Number of reviews',data:ratings.map(x=>x.count)}]},options:{responsive:true}});
+  new Chart(document.getElementById('monthlyChart'), {type:'line',data:{labels:monthly.map(x=>x.month),datasets:[{label:'Reviews',data:monthly.map(x=>x.review_count),tension:.3,fill:false}]},options:{responsive:true}});
+}
+</script>
+</body>
+</html>

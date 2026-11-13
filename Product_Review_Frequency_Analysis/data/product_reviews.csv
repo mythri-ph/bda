@@ -1,0 +1,21 @@
+review_id,product_id,product_name,reviewer_id,review_text,rating,review_date
+R001,P101,Wireless Headphones,U01,"Excellent sound quality and comfortable fit. Battery lasts long.",5,2026-01-04
+R002,P102,Smart Watch,U02,"Good features, but the battery drains quickly.",3,2026-01-05
+R003,P101,Wireless Headphones,U03,"Great audio, clear calls, and easy to connect.",5,2026-01-08
+R004,P103,Bluetooth Speaker,U04,"Poor sound at high volume. Not worth the price.",2,2026-01-10
+R005,P104,USB-C Charger,U05,"Fast charging and compact design. Very useful.",5,2026-01-12
+R006,P102,Smart Watch,U06,"The display is nice and tracking is accurate.",4,2026-02-02
+R007,P101,Wireless Headphones,U07,"Comfortable headphones with great battery life.",4,2026-02-07
+R008,P105,Laptop Stand,U08,"Sturdy build and good quality. Easy to adjust.",5,2026-02-10
+R009,P103,Bluetooth Speaker,U09,"Sound is average and connection is unstable.",2,2026-02-15
+R010,P104,USB-C Charger,U10,"Stopped working after a week. Very disappointing.",1,2026-02-20
+R011,P101,Wireless Headphones,U11,"Amazing sound and comfortable for long use.",5,2026-03-01
+R012,P105,Laptop Stand,U12,"Useful product, but the height adjustment is stiff.",3,2026-03-04
+R013,P102,Smart Watch,U13,"Good value for money and helpful health tracking.",4,2026-03-09
+R014,P104,USB-C Charger,U14,"Works perfectly and charges my phone fast.",5,2026-03-11
+R015,P103,Bluetooth Speaker,U15,"Bad battery life. Audio quality is disappointing.",1,2026-03-17
+R016,P105,Laptop Stand,U16,"Excellent quality and stable on my desk.",5,2026-04-03
+R017,P101,Wireless Headphones,U17,"Noise cancellation is good, but microphone is average.",4,2026-04-08
+R018,P102,Smart Watch,U18,"Screen stopped responding. Poor experience.",1,2026-04-12
+R019,P104,USB-C Charger,U19,"Small, reliable and fast. I recommend it.",5,2026-04-18
+R020,P103,Bluetooth Speaker,U20,"Decent speaker for the price and easy to carry.",4,2026-04-22
